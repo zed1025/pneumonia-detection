@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Pneumonia Detection | Jovian Course Project</title>
+
+	<link rel="stylesheet" type="text/css" href="./../css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="./../css/style.css">
+</head>
+<body>
+	<!-- Navbar -->
+	<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+	  <div class="container">
+	  <a class="navbar-brand" href="../index.html"><img src="./../images/nav_logo.png" id="nav_logo"></a>
+	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+	    <span class="navbar-toggler-icon"></span>
+	  </button>
+	  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+	    <div class="navbar-nav">
+	    </div>
+	  </div>
+	  </div>
+	</nav>
+	<!-- Navbar END -->
+	<br><br><hr>
+
+
+	<div class="container">
+		<div class="row">
+			<div class="col col-sm-12">
+				<a class="btn btn-primary btn-lg float-right" href="../blog.html" role="button">Back</a>
+			</div>
+		</div>
+	</div> <br>
+
+
+	<div class="container">
+		<div class="row">
+			<div class="col col-sm-12">
+				<h1>Pneumonia Detection From X-Ray Images</h1>
+				<img src="../images/xray-grid.png" class="rounded mx-auto d-block">
+				<h3>Introduction</h3>
+				<p>This project uses X-ray Images of patients to detect whether they are suffering from pneumonia or not. Chest X-ray images (anterior-posterior) were selected from retrospective cohorts of pediatric patients of one to five years old from Guangzhou Women and Children’s Medical Center, Guangzhou. All chest X-ray imaging was performed as part of patients’ routine clinical care.  </p>
+				<h3>About the Dataset</h3>
+				<p>The dataset is organized into 3 folders (train, test, val) and contains subfolders for each image category (Pneumonia/Normal). There are 5,863 X-Ray images (JPEG) and 2 categories (Pneumonia/Normal). </p>
+				<p>For the analysis of chest x-ray images, all chest radiographs were initially screened for quality control by removing all low quality or unreadable scans. The diagnoses for the images were then graded by two expert physicians before being cleared for training the AI system. In order to account for any grading errors, the evaluation set was also checked by a third expert.</p>
+				<img src="../images/sample.png" class="rounded mx-auto d-block">
+				<p><b>Figure 1. Illustrative Examples of Chest X-Rays in Patients with Pneumonia.</b> The normal chest X-ray (left panel) depicts clear lungs without any areas of abnormal opacification in the image. Bacterial pneumonia (middle) typically exhibits a focal lobar consolidation, in this case in the right upper lobe (white arrows), whereas viral pneumonia (right) manifests with a more diffuse ‘‘interstitial’’ pattern in both lungs.</p>
+				<h3>Acknowledgements</h3>
+				<p>Data: <a href="https://data.mendeley.com/datasets/rscbjbr9sj/2">https://data.mendeley.com/datasets/rscbjbr9sj/2</a><br>
+				License: CC BY 4.0 <br>
+				Citation: <a href="http://www.cell.com/cell/fulltext/S0092-8674(18)30154-5">http://www.cell.com/cell/fulltext/S0092-8674(18)30154-5</a></p>
+				<h3>What is Pneumonia?</h3>
+				<img src="../images/pneumonia.png" class="rounded mx-auto d-block">
+				<p>Pneumonia is an inflammatory condition of the lung affecting primarily the small air sacs known as alveoli.Symptoms typically include some combination of productive or dry cough, chest pain, fever and difficulty breathing. The severity of the condition is variable. Pneumonia is usually caused by infection with viruses or bacteria and less commonly by other microorganisms, certain medications or conditions such as autoimmune diseases.Risk factors include cystic fibrosis, chronic obstructive pulmonary disease (COPD), asthma, diabetes, heart failure, a history of smoking, a poor ability to cough such as following a stroke and a weak immune system. Diagnosis is often based on symptoms and physical examination. Chest X-ray, blood tests, and culture of the sputum may help confirm the diagnosis.The disease may be classified by where it was acquired, such as community- or hospital-acquired or healthcare-associated pneumonia.</p>
+				<h2>Analysis</h2>
+				<h3>Preparing Data</h3>
+				<p>Each image is a [3, 1857, 1317], [C, W, H], image. We will use the <code>ImageFolder</code> from <code>torchvision.datasets</code> to read the data. Since the data is already organised into train, test and validate folders, there is no need to split the data. The following three transformations will be applies to the test, validate, and train data. </p>
+				<iframe src="https://jovian.ml/embed?url=https://jovian.ml/ak1608759/pneumonia-detection-from-chest-xray/v/9&cellId=3" title="Jovian Viewer" height="487" width="800" frameborder="0" scrolling="auto"></iframe>
+				<p>After this we will add the data to the <code>DataLoader</code></p>
+				<iframe src="https://jovian.ml/embed?url=https://jovian.ml/ak1608759/pneumonia-detection-from-chest-xray/v/9&cellId=4" title="Jovian Viewer" height="187" width="800" frameborder="0" scrolling="auto"></iframe>
+				<p>Experiment with different batch size and hyperparameters shows later.</p>
+				<iframe src="https://jovian.ml/embed?url=https://jovian.ml/ak1608759/pneumonia-detection-from-chest-xray/v/9&cellId=5" title="Jovian Viewer" height="167" width="800" frameborder="0" scrolling="auto"></iframe>
+				<p>Viewing a sample of the data</p>
+				<iframe src="https://jovian.ml/embed?url=https://jovian.ml/ak1608759/pneumonia-detection-from-chest-xray/v/4&cellId=6" title="Jovian Viewer" height="488" width="800" frameborder="0" scrolling="auto"></iframe>
+				<iframe src="https://jovian.ml/embed?url=https://jovian.ml/ak1608759/pneumonia-detection-from-chest-xray/v/4&cellId=7" title="Jovian Viewer" height="null" width="800" frameborder="0" scrolling="auto"></iframe>
+				<p>In this project I will use the following two evaluation metrics. F-score and accuracy score.</p>
+				<iframe src="https://jovian.ml/embed?url=https://jovian.ml/ak1608759/pneumonia-detection-from-chest-xray/v/4&cellId=12" title="Jovian Viewer" height="328" width="800" frameborder="0" scrolling="auto"></iframe>
+				<iframe src="https://jovian.ml/embed?url=https://jovian.ml/ak1608759/pneumonia-detection-from-chest-xray/v/4&cellId=13" title="Jovian Viewer" height="128" width="800" frameborder="0" scrolling="auto"></iframe>
+				<h3>Trying Model: resnet34(pretrained)</h3>
+				<p>Model Architecture with the last layer changed.</p>
+				<iframe src="https://jovian.ml/embed?url=https://jovian.ml/ak1608759/pneumonia-detection-from-chest-xray/v/4&cellId=15" title="Jovian Viewer" height="528" width="800" frameborder="0" scrolling="auto"></iframe>
+				<p>Model performance after random initialization</p>
+				<iframe src="https://jovian.ml/embed?url=https://jovian.ml/ak1608759/pneumonia-detection-from-chest-xray/v/4&cellId=21" title="Jovian Viewer" height="138" width="800" frameborder="0" scrolling="auto"></iframe>
+				<p>Hyperparameters used for this model</p>
+				<iframe src="https://jovian.ml/embed?url=https://jovian.ml/ak1608759/pneumonia-detection-from-chest-xray/v/4&cellId=23" title="Jovian Viewer" height="168" width="800" frameborder="0" scrolling="auto"></iframe>
+				<p>The model gives identical performance with and without freezing. The following shows training of the model.</p>
+				<iframe src="https://jovian.ml/embed?url=https://jovian.ml/ak1608759/pneumonia-detection-from-chest-xray/v/4&cellId=26" title="Jovian Viewer" height="800" width="800" frameborder="0" scrolling="auto"></iframe>
+				<p>Graphs</p>
+				<iframe src="https://jovian.ml/embed?url=https://jovian.ml/ak1608759/pneumonia-detection-from-chest-xray/v/4&cellId=29" title="Jovian Viewer" height="367" width="800" frameborder="0" scrolling="auto"></iframe>
+				<iframe src="https://jovian.ml/embed?url=https://jovian.ml/ak1608759/pneumonia-detection-from-chest-xray/v/4&cellId=31" title="Jovian Viewer" height="367" width="800" frameborder="0" scrolling="auto"></iframe>
+				<iframe src="https://jovian.ml/embed?url=https://jovian.ml/ak1608759/pneumonia-detection-from-chest-xray/v/4&cellId=33" title="Jovian Viewer" height="367" width="800" frameborder="0" scrolling="auto"></iframe>
+				<p>The model gives around 62% accuracy on the validation set, which is not very good and can be improved.</p>
+				<p>I tried the following models with very similar results.</p>
+				<img src="../images/try1.png" class="rounded mx-auto d-block">
+				<h3>Conclusin so far</h3>
+				<p>Pretrained models are <b>not</b> working very well with this dataset, or I'm using wrong set of hyperparameters. I have tried experimenting with different hyperparameter values but the results are very similar.</p>
+				<h3>Trying a Custom CNN architecture</h3>
+				<p>I tried the following architecture. But the model has a weird behaviour, where its validation score is fixed at 0.5. It doesnt change at all during the training.</p>
+				<iframe src="https://jovian.ml/embed?url=https://jovian.ml/ak1608759/pneumonia-detection-from-chest-xray/v/9&cellId=19" title="Jovian Viewer" height="800" width="800" frameborder="0" scrolling="auto"></iframe>
+				<iframe src="https://jovian.ml/embed?url=https://jovian.ml/ak1608759/pneumonia-detection-from-chest-xray/v/9&cellId=25" title="Jovian Viewer" height="138" width="800" frameborder="0" scrolling="auto"></iframe>
+				<iframe src="https://jovian.ml/embed?url=https://jovian.ml/ak1608759/pneumonia-detection-from-chest-xray/v/9&cellId=28" title="Jovian Viewer" height="800" width="800" frameborder="0" scrolling="auto"></iframe>
+
+
+				<h3>Final Conclusion</h3>
+				<p>This dataset has only around 6k images, which is relatively low. Finding more training examples will definitely help improve performance.</p>
+				<p>The custom model gets stuck at 0.5 val_score and I cant seem to find a fix for it.</p>
+				<p>mobilenet gives by far the best result with 69% validation score.</p>
+
+				<h3>Future Work</h3>
+				<p>The following things can be done to improve the performance</p>
+				<ul>
+					<li>Try a different architecture</li>
+					<li>Use Transfer Learning</li>
+					<li>Try out other set of hyperparameters</li>
+					<li>Look for more data</li>
+				</ul>
+
+			</div>
+		</div>
+	</div><br>
+
+
+
+
+
+
+
+
+
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+	<!-- JS, Popper.js, and jQuery -->
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+</body>
+</html>
